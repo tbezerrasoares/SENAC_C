@@ -1,5 +1,7 @@
 #include <unistd.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 static size_t nb_word(char const *s, char c)
 {
@@ -71,4 +73,25 @@ char **sc_split(char const *s, char c)
 	}
 	tab[i] = NULL;
 	return (tab);
+}
+
+int main()
+{
+	const char *input = "Esta,e,uma,frase,de,exemplo";
+	char delimiter = ',';
+
+	char **result = sc_split(input, delimiter);
+
+	if (result)
+	{
+		for (int i = 0; result[i] != NULL; i++ )
+		{
+			printf("Part %d: %s \n", i, result[i]);
+			//free(result[i]);
+		}
+		free(result);
+	}
+	else
+		printf("Alocação de memoria falhou.\n");
+	return 0;
 }
